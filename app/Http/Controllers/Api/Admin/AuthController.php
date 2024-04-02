@@ -18,10 +18,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        try {
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
+        } catch (ValidationException $e) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Authentication error',
+                'errors' => $e->validator->errors()->toArray(),
+            ], 422);
+        }
         $credentials = $request->only('email', 'password');
 
         $token = Auth::attempt($credentials);
