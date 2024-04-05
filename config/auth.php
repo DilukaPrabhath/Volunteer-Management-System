@@ -43,7 +43,12 @@ return [
 
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'users',
+            'provider' => 'users',  // Use for the Admin
+        ],
+
+        'organization-api' => [
+            'driver' => 'jwt',
+            'provider' => 'organizations', // Use the Organization
         ],
 
     ],
@@ -69,6 +74,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'organizations' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Organization::class,
         ],
 
         // 'users' => [
