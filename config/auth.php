@@ -51,6 +51,11 @@ return [
             'provider' => 'organizations', // Use the Organization
         ],
 
+        'volunteer-api' => [
+            'driver' => 'jwt',
+            'provider' => 'volunteers', // Use the Volunteer
+        ],
+
     ],
 
     /*
@@ -79,6 +84,11 @@ return [
         'organizations' => [
             'driver' => 'eloquent',
             'model' => App\Models\Organization::class,
+        ],
+
+        'volunteers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Volunteer::class,
         ],
 
         // 'users' => [

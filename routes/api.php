@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Client\OrganizationAuthController;
+use App\Http\Controllers\Api\Client\VolunteerAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,9 @@ Route::post('/refresh', [AuthController::class, 'refresh']);
 
 Route::post('/organization/register', [OrganizationAuthController::class, 'register']);
 Route::post('/organization/login', [OrganizationAuthController::class, 'login']);
+
+Route::post('/volunteer/register', [VolunteerAuthController::class, 'register']);
+Route::post('/volunteer/login', [VolunteerAuthController::class, 'login']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
