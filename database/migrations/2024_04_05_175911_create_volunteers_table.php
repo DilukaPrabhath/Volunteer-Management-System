@@ -27,6 +27,7 @@ class CreateVolunteersTable extends Migration
             $table->string('profile_image')->nullable();
             $table->integer('status')->default(1)->nullable();
             $table->string('news_letter_sub')->nullable();
+            $table->string('user_type')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

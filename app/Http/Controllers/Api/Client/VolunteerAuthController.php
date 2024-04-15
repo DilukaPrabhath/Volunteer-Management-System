@@ -87,6 +87,7 @@ class VolunteerAuthController extends Controller
             'birth_of_date' => $request->birth_of_date,
             'password'      => Hash::make($request->password),
             'news_letter_sub' => $request->news_letter_sub,
+            'user_type'     => "volunteer",
         ]);
 
         $token = Auth::login($user);

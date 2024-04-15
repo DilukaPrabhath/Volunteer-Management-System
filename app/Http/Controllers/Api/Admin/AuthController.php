@@ -79,6 +79,7 @@ class AuthController extends Controller
             'email'      => $request->email,
             'mobile'     => $request->mobile,
             'password'   => Hash::make($request->password),
+            'user_type'  => "admin",
         ]);
 
         $token = Auth::login($user);

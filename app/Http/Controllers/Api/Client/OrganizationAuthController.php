@@ -78,6 +78,7 @@ class OrganizationAuthController extends Controller
             'email'          => $request->email,
             'contact_no'     => $request->contact_no,
             'password'       => Hash::make($request->password),
+            'user_type'     => "organization",
         ]);
 
         $token = Auth::login($user);
