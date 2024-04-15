@@ -22,6 +22,7 @@ class CreateOrganizationsTable extends Migration
             $table->text('description')->nullable();
             $table->string('organization_image')->nullable();
             $table->integer('status')->default(1)->nullable();
+            $table->string('user_type')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
