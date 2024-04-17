@@ -26,14 +26,17 @@ trait CampaignTrait
 
     protected function saveOrUpdateCampaignsData($request)
     {
-
         if($request->hasfile('image')){
             $file =$request->file('image');
             $extension=$file->getClientOriginalExtension();
             $filename=time().'.'.$extension;
             $file->move('image/campaign/',$filename);
         }else{
-
+            $filename = "";
+            if ($request->has('id')) {
+                $existingOrganization = Organization::findOrFail($request->id);
+                $filename = $existingOrganization->organization_image;
+            }
         }
 
         $campaignData = [
@@ -48,6 +51,14 @@ trait CampaignTrait
             'updated_by'     => ($request['id'] == null) ? null : Auth::guard('organization-api')->id(),
             'image'          => $filename,
         ];
+
+//        if ($request->hasFile('image')) {
+//            $file = $request->file('image');
+//            $extension = $file->getClientOriginalExtension();
+//            $filename = time() . '.' . $extension;
+//            $file->move('image/organization/', $filename);
+//            $campaignData['organization_image'] = $filename;
+//        }
 
         $campaign = Campaign::updateOrCreate(array('id'=>$request['id']),$campaignData);
         return $campaign;
