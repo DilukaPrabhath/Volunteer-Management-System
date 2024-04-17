@@ -25,6 +25,7 @@ class Volunteer extends Authenticatable implements JWTSubject
         'news_letter_sub',
         'profile_image',
         'status',
+        'user_type',
         'password',
         'remember_token',
         'email_verified_at',
