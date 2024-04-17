@@ -19,6 +19,7 @@ class Organization extends Authenticatable implements JWTSubject
         'description',
         'organization_image',
         'status',
+        'user_type',
         'password',
         'remember_token',
     ];

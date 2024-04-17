@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Client\OrganizationAuthController;
 use App\Http\Controllers\Api\Client\VolunteerAuthController;
+use App\Http\Controllers\Api\Client\Organization\CampaignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('is_vendor')->group(function () {
-    // Routes accessible only to authenticated vendors
+Route::middleware('organization-api')->group(function () {
+    Route::get('/organization/campaign', [CampaignController::class, 'index']);
+    Route::post('/organization/campaign/store', [CampaignController::class, 'store']);
+    Route::post('/organization/campaign/update', [CampaignController::class, 'update']);
 });
