@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Client\OrganizationAuthController;
 use App\Http\Controllers\Api\Client\VolunteerAuthController;
 use App\Http\Controllers\Api\Client\Organization\CampaignController;
+use App\Http\Controllers\Api\Client\Organization\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,6 @@ Route::middleware('organization-api')->group(function () {
     Route::get('/organization/campaign', [CampaignController::class, 'index']);
     Route::post('/organization/campaign/store', [CampaignController::class, 'store']);
     Route::post('/organization/campaign/update', [CampaignController::class, 'update']);
+    Route::get('/organization/profile', [ProfileController::class, 'profileView']);
+    Route::post('/organization/profile/update', [ProfileController::class, 'profileUpdate']);
 });

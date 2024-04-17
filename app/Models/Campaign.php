@@ -20,7 +20,7 @@ class Campaign extends Model
         'image',
         'status',
         'created_by',
-        'com_image',
+        'image',
         'created_by',
         'updated_by',
     ];
