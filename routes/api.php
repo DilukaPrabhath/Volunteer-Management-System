@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Client\OrganizationAuthController;
 use App\Http\Controllers\Api\Client\VolunteerAuthController;
 use App\Http\Controllers\Api\Client\Organization\CampaignController;
 use App\Http\Controllers\Api\Client\Organization\ProfileController;
+use App\Http\Controllers\Api\Client\Volunteer\VolunteerCampaignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +33,9 @@ Route::post('/volunteer/register', [VolunteerAuthController::class, 'register'])
 Route::post('/volunteer/login', [VolunteerAuthController::class, 'login']);
 
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('volunteer-api')->group(function () {
+    Route::get('/volunteer/campaign', [VolunteerCampaignController::class, 'index']);
+    Route::post('/volunteer/campaign/register', [VolunteerCampaignController::class, 'campaignRegister']);
 });
 
 Route::middleware('organization-api')->group(function () {

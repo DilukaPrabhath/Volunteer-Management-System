@@ -7,6 +7,7 @@ use App\Models\Campaign;
 use Illuminate\Http\Request;
 use App\Traits\Campaign\CampaignTrait;
 use App\Http\Requests\Organization\CampaignRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 class CampaignController extends Controller
@@ -19,8 +20,8 @@ class CampaignController extends Controller
     }
 
     public function index(){
-
-        $campaigns = Campaign::with('objectives')->latest('created_at')->paginate(10);
+        $id = Auth::guard('organization-api')->id();
+        $campaigns = Campaign::with('objectives')->where('created_by',$id)->latest('created_at')->paginate(10);
 
         if (!$campaigns) {
             return response()->json([

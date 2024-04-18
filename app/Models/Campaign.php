@@ -19,8 +19,9 @@ class Campaign extends Model
         'overview',
         'image',
         'status',
-        'created_by',
-        'image',
+        'categories',
+        'skill',
+        'duration',
         'created_by',
         'updated_by',
     ];

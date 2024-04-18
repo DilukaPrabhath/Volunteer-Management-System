@@ -20,7 +20,10 @@ class CreateCampaignsTable extends Migration
             $table->date('date');
             $table->time('start_time');
             $table->time('end_time');
-            $table->text('overview');
+            $table->text('overview')->nullable();
+            $table->string('categories')->nullable();
+            $table->string('skill')->nullable();
+            $table->string('duration')->nullable();
             $table->string('image')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
