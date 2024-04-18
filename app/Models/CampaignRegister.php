@@ -20,4 +20,9 @@ class CampaignRegister extends Model
         'week_end_days_end_time',
         'status',
     ];
+
+    public function campaign()
+    {
+        return $this->belongsTo(Campaign::class, 'campaign_id');
+    }
 }
