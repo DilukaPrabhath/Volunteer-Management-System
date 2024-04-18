@@ -57,17 +57,6 @@ class ProfileController extends Controller
         try {
             DB::transaction(function () use($request) {
 
-//                $organization =  Organization::find($request->id);
-//
-//                $organization->organization_name  = $request->organization_name;
-//                $organization->address            = $request->address;
-//                $organization->email              = $request->email;
-//                if(!$request->password == null){
-//                    $organization->password       = Hash::make($request->password);
-//                }
-//                $organization->contact_no         = $request->contact_no;
-//                $organization->organization_image = $request->organization_image;
-
                 if($request->hasfile('organization_image')){
                     $file =$request->file('organization_image');
                     $extension=$file->getClientOriginalExtension();

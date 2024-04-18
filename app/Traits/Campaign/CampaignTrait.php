@@ -6,6 +6,7 @@ use App\Models\Campaign;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 trait CampaignTrait
 {
@@ -34,8 +35,8 @@ trait CampaignTrait
         }else{
             $filename = "";
             if ($request->has('id')) {
-                $existingOrganization = Organization::findOrFail($request->id);
-                $filename = $existingOrganization->organization_image;
+                $existingCampaign = Campaign::findOrFail($request->id);
+                $filename = $existingCampaign->image;
             }
         }
 
@@ -46,19 +47,23 @@ trait CampaignTrait
             'start_time'     => $request['start_time'],
             'end_time'       => $request['end_time'],
             'overview'       => $request['overview'],
+            'categories'     => $request['categories'],
+            'skill'          => $request['skill'],
+            'duration'       => $request['duration'],
             'status'         => 1,
-            'created_by'     => ($request['id'] == null) ? Auth::guard('organization-api')->id() : null,
-            'updated_by'     => ($request['id'] == null) ? null : Auth::guard('organization-api')->id(),
+            'updated_by'     => Auth::guard('organization-api')->id(),
             'image'          => $filename,
         ];
+        $existingCampaign = null;
+        if ($request->filled('id')) {
+            $existingCampaign = Campaign::findOrFail($request->id);
+        }
 
-//        if ($request->hasFile('image')) {
-//            $file = $request->file('image');
-//            $extension = $file->getClientOriginalExtension();
-//            $filename = time() . '.' . $extension;
-//            $file->move('image/organization/', $filename);
-//            $campaignData['organization_image'] = $filename;
-//        }
+        if (!$request->filled('id')) {
+            $campaignData['created_by'] = Auth::guard('organization-api')->id();
+        } else {
+            $campaignData['created_by'] = $existingCampaign->created_by;
+        }
 
         $campaign = Campaign::updateOrCreate(array('id'=>$request['id']),$campaignData);
         return $campaign;
