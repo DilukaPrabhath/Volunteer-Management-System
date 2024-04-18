@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Client\VolunteerAuthController;
 use App\Http\Controllers\Api\Client\Organization\CampaignController;
 use App\Http\Controllers\Api\Client\Organization\ProfileController;
 use App\Http\Controllers\Api\Client\Volunteer\VolunteerCampaignController;
+use App\Http\Controllers\Api\Client\Volunteer\VolunteerProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::post('/volunteer/login', [VolunteerAuthController::class, 'login']);
 Route::middleware('volunteer-api')->group(function () {
     Route::get('/volunteer/campaign', [VolunteerCampaignController::class, 'index']);
     Route::post('/volunteer/campaign/register', [VolunteerCampaignController::class, 'campaignRegister']);
+    Route::get('/volunteer/campaign/register-list', [VolunteerCampaignController::class, 'registeredCampaignList']);
+    Route::post('/volunteer/campaign/search', [VolunteerCampaignController::class, 'campaignSearch']);
+    Route::post('/volunteer/campaign/filter', [VolunteerCampaignController::class, 'campaignFilter']);
+    Route::get('/volunteer/profile-view', [VolunteerProfileController::class, 'profileView']);
 });
 
 Route::middleware('organization-api')->group(function () {
