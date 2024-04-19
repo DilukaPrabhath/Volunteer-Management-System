@@ -25,4 +25,9 @@ class CampaignRegister extends Model
     {
         return $this->belongsTo(Campaign::class, 'campaign_id');
     }
+
+    public function volunteer()
+    {
+        return $this->belongsTo(Volunteer::class, 'registered_user_id');
+    }
 }

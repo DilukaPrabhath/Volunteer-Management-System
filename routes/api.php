@@ -46,6 +46,8 @@ Route::middleware('volunteer-api')->group(function () {
 
 Route::middleware('organization-api')->group(function () {
     Route::get('/organization/campaign', [CampaignController::class, 'index']);
+    Route::post('/organization/campaign/view', [CampaignController::class, 'view']);
+    Route::post('/organization/campaign/view-registered-volunteer', [CampaignController::class, 'viewRegisteredVolunteer']);
     Route::post('/organization/campaign/store', [CampaignController::class, 'store']);
     Route::post('/organization/campaign/update', [CampaignController::class, 'update']);
     Route::get('/organization/profile', [ProfileController::class, 'profileView']);

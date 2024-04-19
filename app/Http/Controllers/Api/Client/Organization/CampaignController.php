@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Client\Organization;
 
 use App\Http\Controllers\Controller;
 use App\Models\Campaign;
+use App\Models\CampaignRegister;
 use Illuminate\Http\Request;
 use App\Traits\Campaign\CampaignTrait;
 use App\Http\Requests\Organization\CampaignRequest;
@@ -80,8 +81,29 @@ class CampaignController extends Controller
         return $this->campaignsSaveOrUpdate($request);
     }
 
+    public function view(Request $request){
 
+        $campaignData = Campaign::with('objectives')->where('id',$request->id)->first();
 
+        if (!$campaignData) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No campaigns found.',
+                'campaigns' => []
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'campaign data fetched successfully.',
+            'campaigns' => $campaignData
+        ]);
+    }
+
+    public function viewRegisteredVolunteer(Request $request){
+        $campaignData = CampaignRegister::with('volunteer')->where('campaign_id', $request->id)->get();
+        return $campaignData;
+    }
 
 
 }
