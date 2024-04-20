@@ -2,27 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class Organization extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'mobile',
+        'organization_name',
         'email',
+        'contact_no',
         'address',
-        'profile_image',
-        'user_type',
+        'description',
+        'organization_image',
         'status',
+        'user_type',
         'password',
+        'remember_token',
     ];
 
     protected $hidden = [
